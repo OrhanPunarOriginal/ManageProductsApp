@@ -8,6 +8,7 @@ sap.ui.define([
 
 		onInit: function () {
 			var a;
+			var b;
 			var oViewModel,
 				fnSetAppNotBusy,
 				iOriginalBusyDelay = this.getView().getBusyIndicatorDelay();
