@@ -64,6 +64,14 @@ sap.ui.define([
 		/* event handlers                                              */
 		/* =========================================================== */
 
+			/**
+			 * Event handler when the add button gets pressed
+			 * @public
+			 */
+			onAdd: function() {
+				this.getRouter().navTo("add");
+			},
+
 		/**
 		 * Event handler when a filter tab gets pressed
 		 * @param {sap.ui.base.Event} oEvent the filter tab event
@@ -167,6 +175,20 @@ sap.ui.define([
 		onRefresh: function () {
 			var oTable = this.byId("table");
 			oTable.getBinding("items").refresh();
+
+		},
+		/**
+		 * Event handler for press event on object identifier. 
+		 * opens detail popover to show product dimensions.
+		 * @public
+		 */
+		onShowDetailPopover: function (oEvent) {
+			var oPopover = this._getPopover();
+			// var oPopover = this.byId("dimensionsPopover");
+			var oSource = oEvent.getSource();
+			oPopover.bindElement(oSource.getBindingContext().getPath());
+			// open dialog
+			oPopover.openBy(oEvent.getParameter("domRef"));
 		},
 
 		/* =========================================================== */
@@ -179,6 +201,18 @@ sap.ui.define([
 		 * @param {sap.m.ObjectListItem} oItem selected Item
 		 * @private
 		 */
+
+		_getPopover: function () {
+			// create dialog lazily
+			if (!this._oPopover) {
+				// create popover via fragment factory
+				this._oPopover = sap.ui.xmlfragment(
+					"opensapManageProducts.ManageProducts.view.ResponsivePopover", this);
+				this.getView().addDependent(this._oPopover);
+			}
+			return this._oPopover;
+		},
+
 		_showObject: function (oItem) {
 			this.getRouter().navTo("object", {
 				objectId: oItem.getBindingContext().getProperty("ProductID")

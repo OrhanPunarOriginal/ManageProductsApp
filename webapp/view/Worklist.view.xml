@@ -1,5 +1,5 @@
 <mvc:View controllerName="opensapManageProducts.ManageProducts.controller.Worklist" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
-	xmlns:semantic="sap.f.semantic">
+	xmlns:semantic="sap.f.semantic" xmlns:l="sap.ui.layout">
 	<semantic:SemanticPage id="page" headerPinnable="false" toggleHeaderOnTitleClick="false">
 		<semantic:titleHeading>
 			<Title text="{i18n>worklistTitle}" level="H2"/>
@@ -10,8 +10,10 @@
 					<IconTabFilter key="all" showAll="true" count="{i18n>worklistFilterProductsAllCount}" text="{i18n>worklistFilterProductsAll}"/>
 					<IconTabSeparator/>
 					<IconTabFilter key="cheap" icon="sap-icon://waiver" iconColor="Positive" text="{i18n>worklistFilterCheap}" count="{worklistView>/cheap}"/>
-					<IconTabFilter key="moderate" icon="sap-icon://loan" iconColor="Critical" text="{i18n>worklistFilterModerate}" count="{worklistView>/moderate}"/>
-					<IconTabFilter key="expensive" icon="sap-icon://money-bills" iconColor="Negative" text="{i18n>worklistFilterExpensive}" count="{worklistView>/expensive}"/>
+					<IconTabFilter key="moderate" icon="sap-icon://loan" iconColor="Critical" text="{i18n>worklistFilterModerate}"
+						count="{worklistView>/moderate}"/>
+					<IconTabFilter key="expensive" icon="sap-icon://money-bills" iconColor="Negative" text="{i18n>worklistFilterExpensive}"
+						count="{worklistView>/expensive}"/>
 				</items>
 				<content>
 					<Table id="table" width="auto"
@@ -27,6 +29,7 @@
 										<OverflowToolbarLayoutData maxWidth="200px" priority="NeverOverflow"/>
 									</layoutData>
 								</SearchField>
+								<Button id="addButton" icon="sap-icon://add" press="onAdd"/>
 							</OverflowToolbar>
 						</headerToolbar>
 						<columns>
@@ -46,7 +49,7 @@
 						<items>
 							<ColumnListItem type="Navigation" press=".onPress">
 								<cells>
-									<ObjectIdentifier title="{ProductID}" text="{Name}"/>
+									<ObjectIdentifier title="{ProductID}" text="{Name}" titleActive="true" titlePress="onShowDetailPopover"/>
 									<Text text="{SupplierName}"/>
 									<Link text="{ToSupplier/WebAddress}" href="{ToSupplier/WebAddress}" target="_blank"/>
 									<ObjectNumber number="{ path: 'Price', formatter: '.formatter.numberUnit' }" unit="{CurrencyCode}"/>
