@@ -2,8 +2,12 @@ sap.ui.define([
 	"./BaseController",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/routing/History",
-	"../model/formatter"
-], function (BaseController, JSONModel, History, formatter) {
+	"../model/formatter",
+	"sap/m/MessageToast"
+
+], function (BaseController, JSONModel, History, formatter,
+	MessageToast
+) {
 	"use strict";
 
 	return BaseController.extend("opensapManageProducts.ManageProducts.controller.Object", {
@@ -49,6 +53,12 @@ sap.ui.define([
 		 * If not, it will replace the current entry of the browser history with the worklist route.
 		 * @public
 		 */
+		onRatingChanged: function (oEvent) {
+			var iValue = oEvent.getParameter("value"),
+				sMessage = this.getResourceBundle().getText("productRatingSuccess", [iValue]);
+			MessageToast.show(sMessage);
+		},
+
 		onNavBack: function () {
 			var sPreviousHash = History.getInstance().getPreviousHash();
 
