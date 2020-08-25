@@ -19,6 +19,11 @@
 					<smartform:GroupElement>
 						<smartfield:SmartField id="currencyField" value="{CurrencyCode}"/>
 					</smartform:GroupElement>
+					<smartform:GroupElement>
+						<!--						<Select width="100%" id="idSelect" items="{ path: '/ProductSet' }">
+							<core:Item key="{ProductId}" text="{Name}"/>
+						</Select>-->
+					</smartform:GroupElement>
 				</smartform:Group>
 			</smartform:SmartForm>
 		</semantic:content>
